@@ -3,7 +3,25 @@ import React from "react";
 import parseInput from "../functions/parseInput";
 
 function Engine() {
-  parseInput("Hello");
+  const [userInputString, setUserInputString] = React.useState("");
+
+  const generateCommands = () => {
+    const parsedInput = parseInput(userInputString);
+    if (!parseInput) {
+      alert("Invalid Input!!! Please try again.");
+      return;
+    }
+    alert(
+      "Verify that these are the first 50 lines you specified. \n" +
+        parsedInput.lines
+          .slice(0, 50)
+          .map(
+            (ele) =>
+              `Line from keypoint ${ele[0]} to keypoint ${ele[1]}. \t L, ${ele[0]}, ${ele[1]}\n`
+          )
+    );
+  };
+
   return (
     <Card
       sx={{
@@ -20,6 +38,9 @@ function Engine() {
         placeholder={`Your APDL Script
 One Command Per Line`}
         sx={{ width: "100%" }}
+        onChange={(event) => {
+          setUserInputString(event?.target.value);
+        }}
       />
 
       <Card
@@ -36,7 +57,11 @@ One Command Per Line`}
           right: "2rem",
         }}
       >
-        <Button variant="contained" sx={{ maxWidth: "13rem" }}>
+        <Button
+          variant="contained"
+          onClick={generateCommands}
+          sx={{ maxWidth: "13rem" }}
+        >
           <Typography variant="body2" sx={{ fontSize: "0.8rem" }}>
             Generate Commands
           </Typography>
