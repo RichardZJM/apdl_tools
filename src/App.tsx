@@ -2,7 +2,6 @@ import { Button, Card, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import Engine from "./components/Engine";
-import logo from "./logo.svg";
 
 function App() {
   const [userAcknowledgedDisclaimer, setUserAcknowledgedDisclaimer] =
