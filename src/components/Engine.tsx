@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  Dialog,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Card, Dialog, TextField, Typography } from "@mui/material";
 import React from "react";
 import parseInput from "../functions/parseInput";
 import solveAL from "../functions/solveAL";
