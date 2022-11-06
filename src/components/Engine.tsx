@@ -48,7 +48,6 @@ function Engine() {
       (prev, ele) => prev + `\n${ele}`,
       ""
     );
-
     setCommandsVA(volCommandString);
     setViewingVA(solutionVA.commands);
     alert(`Generated ${solutionVA.vols.length} volumes: \n` + volCommandString);

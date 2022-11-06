@@ -83,10 +83,6 @@ function solveVA(lines: number[][], areas: number[][]) {
   for (let i = 1; i < areas.length + 1; ++i) searchArea(i);
 
   let commands = vols.map((ele) => "VA," + ele.toString());
-  const commandCount = commands.length;
-  for (let i = 1; i < commandCount + 1; ++i) {
-    commands.push(`VMESH,` + i);
-  }
 
   //   console.log(areasToID);
   //   console.log(lineConnectedTo);
