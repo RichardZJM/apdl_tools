@@ -24,21 +24,26 @@ function App() {
             APDL Tools
           </Typography>
           <Typography variant="h5" textAlign="center">
-            By Zijian Meng (Sci'22 + 1) and Gayan Abayaratna (Sci'22)
+            By Zijian Meng (Sci'22+1) and Gayan Abayaratna (Sci'22)
           </Typography>
         </Card>
-        <Typography variant="h6">
-          A SOLID185 tool for auto-generating areas and volume commands from
-          line commands.
+        <Typography variant="h6" textAlign="center">
+          A SOLID185 tool for generating area and volume commands from line
+          commands in bottom-up meshing.
         </Typography>
         {!userAcknowledgedDisclaimer && (
           <>
             <Typography variant="h6">Disclaimer:</Typography>
             <Typography variant="body1" maxWidth="30rem">
-              We do not take responsibility for the outputs of these tools.
-              Always check your outputs to make sure they are reasonable. There
-              are known issues with perfectly 1 by 1 square voids which are
-              ambigious and cannot be resolvbed regardless of algorithim.
+              We do not assume responsibility for the outputs of these tools.
+              While these tools can be used exclusively, they best serve as
+              validation and sanity checks. Always verify your ANSYS scripts to
+              make sure they are reasonable. There is an known issue with
+              perfectly hexahedral voids which are ambigious with elements. This
+              cannot be resolved with any algorithim and must be user corrected.
+            </Typography>
+            <Typography variant="h6">
+              PROCEED CAUTION AT YOUR OWN RISK
             </Typography>
             <Button
               variant="contained"

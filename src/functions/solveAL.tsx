@@ -52,7 +52,7 @@ function solveAL(lines: number[][]) {
   //   console.log(areas.keys());
   // console.log(Array.from(areas.keys()).length);
   return {
-    commands: Array.from(areas.keys()).map((ele) => "AL," + ele.slice(0, -1)),
+    commands: Array.from(areas.keys()).map((ele) => "AL," + ele),
     areas: Array.from(areas.values()),
   };
 }
