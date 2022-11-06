@@ -28,8 +28,8 @@ function App() {
           </Typography>
         </Card>
         <Typography variant="h6">
-          A tool for auto-generating areas and volume commands from line
-          commands.
+          A SOLID185 tool for auto-generating areas and volume commands from
+          line commands.
         </Typography>
         {!userAcknowledgedDisclaimer && (
           <>
