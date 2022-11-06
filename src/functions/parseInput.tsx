@@ -144,7 +144,6 @@
 // `;
 
 function parseInput(apdl: string) {
-  // apdl = testCase;
   apdl = apdl.replace(/ /g, "").toLowerCase();
 
   // eslint-disable-next-line
@@ -154,16 +153,9 @@ function parseInput(apdl: string) {
   const lines = lineCommands.map((ele) =>
     [...ele[0].matchAll(regexpPoint)].map((ele2) => +ele2[0])
   );
-  const points = new Set();
 
-  lines.forEach((ele) => {
-    points.add(ele[0]);
-    points.add(ele[1]);
-  });
-
-  console.log(lines);
-  console.log(points);
-  return { lines, points };
+  // console.log(lines);
+  return lines;
 }
 
 export default parseInput;
