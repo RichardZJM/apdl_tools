@@ -43,7 +43,7 @@ function App() {
               cannot be resolved with any algorithim and must be user corrected.
             </Typography>
             <Typography variant="h6">
-              PROCEED CAUTION AT YOUR OWN RISK
+              PROCEED WITH CAUTION AT YOUR OWN RISK
             </Typography>
             <Button
               variant="contained"
