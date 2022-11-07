@@ -24,7 +24,7 @@ function App() {
             APDL Tools
           </Typography>
           <Typography variant="h5" textAlign="center">
-            By Zijian Meng (Sci'22+1) and Gayan Abayaratna (Sci'22)
+            By ②③⑧ and Gayan Abayaratna (Sci'22)
           </Typography>
         </Card>
         <Typography variant="h6" textAlign="center">
@@ -36,12 +36,13 @@ function App() {
             <Typography variant="h6">Disclaimer:</Typography>
             <Typography variant="body1" maxWidth="30rem">
               We do not assume responsibility for the outputs of these tools.
-              While these tools can be used exclusively, they best serve as
+              While these tools can be used exclusively, they should be used as
               validation and sanity checks. Always verify your ANSYS scripts to
               make sure they are reasonable. There is an known issue with
               perfectly hexahedral voids which are ambigious with elements. This
               cannot be resolved with any algorithim and must be user corrected.
             </Typography>
+
             <Typography variant="h6">
               PROCEED WITH CAUTION AT YOUR OWN RISK
             </Typography>
@@ -53,6 +54,15 @@ function App() {
             >
               I have read and acknowledge this disclaimer
             </Button>
+            <Typography marginTop="2rem">
+              <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
+              >
+                Tutorial Here (not that you'd need it, the tool is dead simple
+                to use)
+              </a>
+            </Typography>
           </>
         )}
 
