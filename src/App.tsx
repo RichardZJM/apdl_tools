@@ -57,6 +57,7 @@ function App() {
             <Typography marginTop="2rem">
               <a
                 target="_blank"
+                rel="noreferrer"
                 href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
               >
                 Tutorial Here (not that you'd need it, the tool is dead simple
