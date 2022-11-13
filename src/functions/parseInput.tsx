@@ -154,8 +154,18 @@ function parseInput(apdl: string) {
     [...ele[0].matchAll(regexpPoint)].map((ele2) => +ele2[0])
   );
 
+  const uniques: Set<string> = new Set();
+  const duplicates: string[] = [];
+
+  for (let line of lines) {
+    if (uniques.has([...line].sort((a, b) => a - b).toString()))
+      duplicates.push("L," + line.toString());
+    uniques.add([...line].sort((a, b) => a - b).toString());
+  }
+
   // console.log(lines);
-  return lines;
+  // console.log(duplicates);
+  return { lines, duplicates };
 }
 
 export default parseInput;

@@ -15,11 +15,28 @@ function Engine() {
   const [modalVAOpen, setModalVAOpen] = React.useState(false);
 
   const generateCommands = () => {
-    const lines = parseInput(userInputString);
-    if (!lines) {
-      alert("Invalid Input!!! Please try again.");
+    const userInput = parseInput(userInputString);
+
+    //Apprise user of duplicates
+    if (userInput.duplicates.length != 0) {
+      alert(
+        "Duplicates lines found!!! Please correct issue before runing again! \n" +
+          userInput.duplicates.map((ele) => "Duplicate: " + ele + "\n")
+      );
       return;
     }
+
+    const lines = userInput.lines;
+
+    //Apprise issue of insufficent input
+    if (lines.length < 4) {
+      alert(
+        "Invalid Input!!! Not enough lines to form a quadrilateral! Please try again."
+      );
+      return;
+    }
+
+    //Alert user of parsing results
     alert(
       "Verify that these are the first few lines you specified. \n" +
         lines
