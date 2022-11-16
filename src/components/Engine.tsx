@@ -38,7 +38,7 @@ function Engine() {
 
     //Alert user of parsing results
     alert(
-      "Verify that these are the first few lines you specified. \n" +
+      ` ${lines.length} lines detected! \n Verify that these are the first few lines you specified. \n` +
         lines
           .slice(0, 50)
           .map(

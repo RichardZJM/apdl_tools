@@ -147,12 +147,25 @@ function parseInput(apdl: string) {
   apdl = apdl.replace(/ /g, "").toLowerCase();
 
   // eslint-disable-next-line
-  const regexpLine: RegExp = /\nl\,\d*\,\d*/g;
+  const regexpLine: RegExp = /(\nl\,\d*\,\d*|\nspline(\,\d\d*){2,6})/g;
   const lineCommands = [...apdl.matchAll(regexpLine)];
+
+  console.log(lineCommands);
   const regexpPoint: RegExp = /\d\d*/g;
-  const lines = lineCommands.map((ele) =>
-    [...ele[0].matchAll(regexpPoint)].map((ele2) => +ele2[0])
-  );
+  const lines: number[][] = [];
+  for (const match of lineCommands) {
+    console.log(lines);
+    if (match[0][2] === "l")
+      lines.push([...match[0].matchAll(regexpPoint)].map((ele2) => +ele2[0]));
+    else {
+      const points = [...match[0].matchAll(regexpPoint)].map(
+        (ele2) => +ele2[0]
+      );
+      for (let i = 0; i < points.length - 1; ++i) {
+        lines.push([+points[i], +points[i + 1]]);
+      }
+    }
+  }
 
   const uniques: Set<string> = new Set();
   const duplicates: string[] = [];
