@@ -144,15 +144,33 @@
 // `;
 
 function parseInput(apdl: string) {
+  //Remove case sensitivity
   apdl = apdl.replace(/ /g, "").toLowerCase();
 
+  //Match all line and spline commands
   // eslint-disable-next-line
-  const regexpLine: RegExp = /\nl\,\d*\,\d*/g;
+  const regexpLine: RegExp = /(\nl\,\d*\,\d*|\nspline(\,\d\d*){2,6})/g;
   const lineCommands = [...apdl.matchAll(regexpLine)];
+
+  //Regex to search for keypoint numbers
   const regexpPoint: RegExp = /\d\d*/g;
-  const lines = lineCommands.map((ele) =>
-    [...ele[0].matchAll(regexpPoint)].map((ele2) => +ele2[0])
-  );
+  const lines: number[][] = [];
+
+  //Parse all commands in the line
+  for (const match of lineCommands) {
+    //Generate a line if a line is read
+    if (match[0][2] === "l")
+      lines.push([...match[0].matchAll(regexpPoint)].map((ele2) => +ele2[0]));
+    //Generate an equivalent series of lines if a spline is read
+    else {
+      const points = [...match[0].matchAll(regexpPoint)].map(
+        (ele2) => +ele2[0]
+      );
+      for (let i = 0; i < points.length - 1; ++i) {
+        lines.push([+points[i], +points[i + 1]]);
+      }
+    }
+  }
 
   const uniques: Set<string> = new Set();
   const duplicates: string[] = [];
