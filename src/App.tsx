@@ -31,9 +31,24 @@ function App() {
           A SOLID185 tool for generating area and volume commands from line
           commands in bottom-up meshing.
         </Typography>
+
         {!userAcknowledgedDisclaimer && (
           <>
-            <Typography variant="h6">Disclaimer:</Typography>
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "1rem 0",
+              }}
+            >
+              <Typography variant="h5">Now with support for:</Typography>
+              <Typography margin="0">Duplicate line checking</Typography>
+              <Typography margin="0">Splines</Typography>
+            </Container>
+
+            <Typography variant="h4">Disclaimer:</Typography>
             <Typography variant="body1" maxWidth="30rem">
               We do not assume responsibility for the outputs of these tools.
               While these tools can be used exclusively, they should be used as

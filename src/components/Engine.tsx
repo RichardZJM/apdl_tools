@@ -18,7 +18,7 @@ function Engine() {
     const userInput = parseInput(userInputString);
 
     //Apprise user of duplicates
-    if (userInput.duplicates.length != 0) {
+    if (userInput.duplicates.length !== 0) {
       alert(
         "Duplicates lines found!!! Please correct issue before runing again! \n" +
           userInput.duplicates.map((ele) => "Duplicate: " + ele + "\n")
