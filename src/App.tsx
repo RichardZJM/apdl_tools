@@ -34,25 +34,11 @@ function App() {
 
         {!userAcknowledgedDisclaimer && (
           <>
-            <Container
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "1rem 0",
-              }}
-            >
-              <Typography variant="h5">Now with support for:</Typography>
-              <Typography margin="0">Duplicate line checking</Typography>
-              <Typography margin="0">Splines</Typography>
-            </Container>
-
             <Typography variant="h4">Disclaimer:</Typography>
             <Typography variant="body1" maxWidth="30rem">
               We do not assume responsibility for the outputs of these tools.
               While these tools can be used exclusively, they should be used as
-              validation and sanity checks. Always verify your ANSYS scripts to
+              validation and sanity checks. Always verify your APDL scripts to
               make sure they are reasonable. There is an known issue with
               perfectly hexahedral voids which are ambigious with elements. This
               cannot be resolved with any algorithim and must be user corrected.
@@ -69,16 +55,6 @@ function App() {
             >
               I have read and acknowledge this disclaimer
             </Button>
-            <Typography marginTop="2rem">
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
-              >
-                Tutorial Here (not that you'd need it, the tool is dead simple
-                to use)
-              </a>
-            </Typography>
           </>
         )}
 
