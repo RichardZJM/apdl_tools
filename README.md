@@ -1,46 +1,20 @@
-# Getting Started with Create React App
+# ANSYS APDL Solid185 Tool 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ANSYS is a commonly used FEM (finite element method) software often used for the engineering analysis of mechanical and structural components. Within ANSYS mechanical, APDL script can be used to perform analyses. Although free meshing (automated) techniques are available, free meshing is mostly restricted to tetrahedral elements which lack accuracy and computational efficiency when compared to hexahedral elements. One such hexahedral element is the commonly-used SOLID185 with which mapped (manual) meshing can be performed. An involved process, users must sequentially define the
 
-## Available Scripts
+1. Keypoints
+2. Lines
+3. Areas
+4. Volumes
 
-In the project directory, you can run:
+which constitute the elements of the model of interest. Each stage is built off the definitions of the previous stages: a line is defined using two keypoints, an area is defined using four connected lines, and a volume is made from six areas. Although all four stages are required, some information is redundant. Consider a square with four keypoints and lines between them. It is sufficient to describe this square using these two stages without explicitly naming the area. With reference to graph theory, we can recognize that areas (quadrilaterals in hexahedral elements) are four-length cycles in the graph formed by the keypoints (vertices) and lines (edges). Searching for these cycles can automate the production of area commands. A similar process was theorized for volume definition. Thus came the inspiration for this project: a potential and appreciable time save in the SOLID185 mapped meshing process.
 
-### `npm start`
+## User Input Parsing
+User inputs are parsed using Regex, specifically searching for line definitions. Lines are defined by referencing to keypoints, meaning the keypoint definitions are not required. Indeed, the keypoint positions are irrelevant when solving for cycles. Regex is used although it should be probably avoided in production code. The line definitions are then proccessed into a hash-map based implementation of a undirected graph.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Area Searching
+As alluded to previously, we can run a cycle-finding algorithm to find all cycles of length four which would indicate the presence of a SOLID185 area. This project implements it as a series of depth-limited depth-first searches originating from each of the vertices. All four length paths which include the originating cycle are searched, and the paths which return to the originating node are saved in a set. One thing to note is that the lines associated with each area can be returned in either clockwise or counterclockwise order. Sorting can be used to find distinguish between the two in the set and prevent duplicate area definitions. The subsequent vertices can ignore the previous vertices in each path as all areas associated with previous nodes are already determined. This is an O(n) approach.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+##  Volume search
+Volume searching is performed much like area searching. The difference here is that the program must provide the six areas that compose the hexahedral volume. The algorithim here approaches this problem by treating four of these areas as a loop and performing a depth limit DFS like before. However, an limitation is imposed on the third area such that is not adjacent to the originating area, and that the fourth area is not adjacent to the second area. Thus, for the cycle to be accepted into the next phase, it must have no areas that are adjacent to any area in the cycle that is not its immediate neighbour in the cycle. This is conceptually similar to the cycle formed by the walls of a six-sided room. The validated four-area cycles can be inserted in a hashmap using the id of the third area as a key. This third area is the area opposite the originating area in the volume. There are two cycles (not considering inverse cycles) which can have this third area as the opposite area. The union of the areas in these two different paths must contain all the areas present in the volume. It follows that when we encounter a four-area cycle whose id is already in the hashmap, we must be encountering either the cycle already stored in the hashamp, its inverse, or the corresponding cycle that makes up the volume. Sorting the cycles can be used to identify and ignore the former two cases, and in the third, we simply take the set of all area identities in the union of the two cycles and stored it in a master output set which contains all the volumes found thus far. Since this process finds all volumes which contain the originating area, subsequent DFS operations can wholly ignore previously DFS'd areas. This is an O(n) approach.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
